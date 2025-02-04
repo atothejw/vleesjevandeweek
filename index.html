@@ -1,4 +1,70 @@
 <!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darttijd Afteller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        #timer {
+            font-size: 36px;
+            margin: 20px 0;
+        }
+        #message {
+            font-size: 24px;
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Darttijd Afteller</h1>
+    <p id="timer"></p>
+    <p id="message">HET IS DARTTIJD!</p>
+
+    <script>
+        function updateTimer() {
+            const now = new Date();
+            const targetTime = new Date();
+            targetTime.setHours(13, 0, 0, 0); // Stel het doel in op 1 uur 's middags
+
+            const remainingTime = targetTime - now; // Bereken de resterende tijd in milliseconden
+
+            if (remainingTime <= 0) {
+                // Als de tijd is bereikt of gepasseerd, toon de boodschap
+                document.getElementById("message").style.display = "block";
+                document.getElementById("timer").style.display = "none";
+            } else {
+                // Bereken uren, minuten en seconden
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                // Toon de resterende tijd in het formaat "uur:minuten:seconden"
+                document.getElementById("timer").textContent = `${hours} uur ${minutes} minuten ${seconds} seconden`;
+            }
+        }
+
+        // Update de timer elke seconde
+        setInterval(updateTimer, 1000);
+
+        // Start de timer direct bij het laden van de pagina
+        updateTimer();
+    </script>
+
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
 <html>
 <head>
 <title>I'm a teapot</title>
@@ -7,4 +73,4 @@
 <h1>I'm a teapot</h1>
 <p>This server is a teapot, and it cannot brew coffee.</p>
 </body>
-</html>
+</html>-->
